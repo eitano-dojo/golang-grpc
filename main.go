@@ -5,8 +5,8 @@ import (
 	"log"
 	"net"
 
-	pb "path/to/your/proto"
-
+	pb "github.com/eitano-dojo/golang-grpc/tree/main/proto"
+	_ "github.com/gofiber/fiber/v2"
 	"google.golang.org/grpc"
 )
 

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package greeter;
-option go_path="https://github.com/eitano-dojo/golang-grpc/tree/main/proto";
+option go_package = "github.com/eitano-dojo/golang-grpc/tree/main/proto";
 
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
