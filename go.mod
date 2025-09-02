@@ -1,4 +1,4 @@
-module protobuf_playing
+module github.com/eitano-dojo/golang-grpc
 
 go 1.24.5
 
