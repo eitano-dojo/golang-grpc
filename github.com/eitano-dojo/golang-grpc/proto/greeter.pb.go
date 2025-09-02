@@ -120,7 +120,7 @@ const file_greeter_proto_rawDesc = "" +
 	"HelloReply\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage2C\n" +
 	"\aGreeter\x128\n" +
-	"\bSayHello\x12\x15.greeter.HelloRequest\x1a\x13.greeter.HelloReply\"\x00B4Z2github.com/eitano-dojo/golang-grpc/tree/main/protob\x06proto3"
+	"\bSayHello\x12\x15.greeter.HelloRequest\x1a\x13.greeter.HelloReply\"\x00B*Z(github.com/eitano-dojo/golang-grpc/protob\x06proto3"
 
 var (
 	file_greeter_proto_rawDescOnce sync.Once
