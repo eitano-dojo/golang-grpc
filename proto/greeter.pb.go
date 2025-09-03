@@ -109,6 +109,94 @@ func (x *HelloReply) GetMessage() string {
 	return ""
 }
 
+type ByeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ByeRequest) Reset() {
+	*x = ByeRequest{}
+	mi := &file_greeter_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ByeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ByeRequest) ProtoMessage() {}
+
+func (x *ByeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ByeRequest.ProtoReflect.Descriptor instead.
+func (*ByeRequest) Descriptor() ([]byte, []int) {
+	return file_greeter_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ByeRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ByeReply struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ByeReply) Reset() {
+	*x = ByeReply{}
+	mi := &file_greeter_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ByeReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ByeReply) ProtoMessage() {}
+
+func (x *ByeReply) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ByeReply.ProtoReflect.Descriptor instead.
+func (*ByeReply) Descriptor() ([]byte, []int) {
+	return file_greeter_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ByeReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_greeter_proto protoreflect.FileDescriptor
 
 const file_greeter_proto_rawDesc = "" +
@@ -118,9 +206,16 @@ const file_greeter_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"&\n" +
 	"\n" +
 	"HelloReply\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2C\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\" \n" +
+	"\n" +
+	"ByeRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"$\n" +
+	"\bByeReply\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2{\n" +
 	"\aGreeter\x128\n" +
-	"\bSayHello\x12\x15.greeter.HelloRequest\x1a\x13.greeter.HelloReply\"\x00B*Z(github.com/eitano-dojo/golang-grpc/protob\x06proto3"
+	"\bSayHello\x12\x15.greeter.HelloRequest\x1a\x13.greeter.HelloReply\"\x00\x126\n" +
+	"\n" +
+	"SayGoodbye\x12\x13.greeter.ByeRequest\x1a\x11.greeter.ByeReply\"\x00B*Z(github.com/eitano-dojo/golang-grpc/protob\x06proto3"
 
 var (
 	file_greeter_proto_rawDescOnce sync.Once
@@ -134,16 +229,20 @@ func file_greeter_proto_rawDescGZIP() []byte {
 	return file_greeter_proto_rawDescData
 }
 
-var file_greeter_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_greeter_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_greeter_proto_goTypes = []any{
 	(*HelloRequest)(nil), // 0: greeter.HelloRequest
 	(*HelloReply)(nil),   // 1: greeter.HelloReply
+	(*ByeRequest)(nil),   // 2: greeter.ByeRequest
+	(*ByeReply)(nil),     // 3: greeter.ByeReply
 }
 var file_greeter_proto_depIdxs = []int32{
 	0, // 0: greeter.Greeter.SayHello:input_type -> greeter.HelloRequest
-	1, // 1: greeter.Greeter.SayHello:output_type -> greeter.HelloReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: greeter.Greeter.SayGoodbye:input_type -> greeter.ByeRequest
+	1, // 2: greeter.Greeter.SayHello:output_type -> greeter.HelloReply
+	3, // 3: greeter.Greeter.SayGoodbye:output_type -> greeter.ByeReply
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -160,7 +259,7 @@ func file_greeter_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_greeter_proto_rawDesc), len(file_greeter_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

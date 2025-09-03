@@ -2,52 +2,38 @@ package main
 
 import (
 	"context"
+	"flag"
+	"fmt"
 	"log"
 	"net"
-	"time"
 
 	pb "github.com/eitano-dojo/golang-grpc/proto"
-	"github.com/gofiber/fiber/v2"
 	"google.golang.org/grpc"
 )
 
+var (
+	port = flag.Int("port", 50051, "The server port")
+)
+
+// server is used to implement helloworld.GreeterServer.
 type server struct {
 	pb.UnimplementedGreeterServer
 }
 
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
+// SayHello implements helloworld.GreeterServer
+func (s *server) SayHello(_ context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	log.Printf("Received: %v", in.GetName())
+	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
+}
+
+func (s *server) SayGoodbye(_ context.Context, in *pb.ByeRequest) (*pb.ByeReply, error) {
+	log.Printf("Received: %v", in.GetName())
+	return &pb.ByeReply{Message: "Goodbye " + in.GetName()}, nil
 }
 
 func main() {
-	go startGRPCServer()
-
-	app := fiber.New()
-
-	app.Get("/hello/:name", func(c *fiber.Ctx) error {
-		name := c.Params("name")
-		conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure(), grpc.WithBlock())
-		if err != nil {
-			return err
-		}
-		defer conn.Close()
-		client := pb.NewGreeterClient(conn)
-
-		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-		defer cancel()
-		resp, err := client.SayHello(ctx, &pb.HelloRequest{Name: name})
-		if err != nil {
-			return err
-		}
-
-		return c.SendString(resp.GetMessage())
-	})
-
-	log.Fatal(app.Listen(":3000"))
-}
-
-func startGRPCServer() {
-	lis, err := net.Listen("tcp", ":50051")
+	flag.Parse()
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
